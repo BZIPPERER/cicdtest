@@ -29,7 +29,7 @@ jobs:
 
       - name: Upload test results
         if: always()  # Even if the tests fail, upload the results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: junit-test-results
           path: target/test-classes  # or path to your test results directory
