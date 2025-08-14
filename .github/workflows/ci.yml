@@ -1,0 +1,36 @@
+name: Run JUnit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+
+      - name: Run JUnit Tests
+        run: mvn test  # This will run all the tests in your project
+
+      - name: Upload test results
+        if: always()  # Even if the tests fail, upload the results
+        uses: actions/upload-artifact@v2
+        with:
+          name: junit-test-results
+          path: target/test-classes  # or path to your test results directory
+

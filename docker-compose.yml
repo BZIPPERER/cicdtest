@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: tenant  # Set root password
+      MYSQL_DATABASE: mydb         # Optional: Create a default database
+    ports:
+      - "3306:3306"  # Expose MySQL on port 3306
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persist MySQL data
+    restart: always
+
+volumes:
+  mysql-data:
+    driver: local
