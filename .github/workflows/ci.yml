@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-   
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,10 +27,5 @@ jobs:
       - name: Run JUnit Tests
         run: mvn test  # This will run all the tests in your project
 
-      - name: Upload test results
-        if: always()  # Even if the tests fail, upload the results
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-test-results
-          path: target/test-classes  # or path to your test results directory
+      
 
